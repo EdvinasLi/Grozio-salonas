@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
 import session from "express-session";
-import database from "./database/connect.js";
+
+import { Saloons, Services, Workers } from "./controller/index.js";
+
 const app = express();
 
 //CORS blokavimo nuėmimas
@@ -29,6 +31,8 @@ app.use(
     },
   })
 );
-
+app.use("/api/saloons", Saloons);
+app.use("/api/services", Services);
+app.use("/api/workers", Workers);
 //Paleidžiame serverį
 app.listen(3000);

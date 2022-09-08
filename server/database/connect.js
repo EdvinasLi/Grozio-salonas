@@ -1,7 +1,14 @@
 import { Sequelize } from "sequelize";
 import mysql from "mysql2/promise";
 import users from "../model/users.js";
-import { Users, Saloons } from "../model/index.js";
+import {
+  Users,
+  Saloons,
+  Workers,
+  Services,
+  Ratings,
+  Orders,
+} from "../model/index.js";
 const database = {};
 const credentials = {
   host: "localhost",
@@ -30,6 +37,28 @@ try {
 
   database.Users = Users(sequelize);
   database.Saloons = Saloons(sequelize);
+  database.Services = Services(sequelize);
+  database.Workers = Workers(sequelize);
+  database.Ratings = Ratings(sequelize);
+  database.Orders = Orders(sequelize);
+
+  database.Saloons.hasOne(database.Workers);
+  database.Workers.belongsTo(database.Saloons);
+
+  database.Saloons.hasMany(database.Services);
+  database.Services.belongsTo(database.Saloons);
+
+  database.Users.hasMany(database.Orders);
+  database.Orders.belongsTo(database.Users);
+
+  database.Services.hasOne(database.Orders);
+  database.Orders.belongsTo(database.Services);
+
+  database.Users.hasOne(database.Ratings);
+  database.Ratings.belongsTo(database.Users);
+
+  database.Workers.hasMany(database.Ratings);
+  database.Ratings.belongsTo(database.Workers);
 
   await sequelize.sync({ alter: true });
 } catch (error) {

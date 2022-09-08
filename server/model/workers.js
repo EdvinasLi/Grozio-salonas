@@ -1,22 +1,23 @@
 import { DataTypes } from "sequelize";
 
-const Services = (sequelize) => {
+const Workers = (sequelize) => {
   const Schema = {
-    name: {
+    first_name: {
       type: DataTypes.STRING, //=VARCHAR(255)
       allowNull: false, //neleidžiamas tuščias laukas - Standartinė reikšmė true
     },
-    duration: {
+    last_name: {
       type: DataTypes.STRING, //=VARCHAR(255)
       allowNull: false, //neleidžiamas tuščias laukas - Standartinė reikšmė true
     },
-    price: {
-      type: DataTypes.DECIMAL(10, 2), //=VARCHAR(255)
+
+    photo: {
+      type: DataTypes.STRING, //=VARCHAR(255)
       allowNull: false, //neleidžiamas tuščias laukas - Standartinė reikšmė true
     },
   };
 
-  return sequelize.define("services", Schema);
+  return sequelize.define("workers", Schema);
 };
 
-export default Services;
+export default Workers;

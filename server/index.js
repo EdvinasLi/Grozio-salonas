@@ -2,7 +2,14 @@ import express from "express";
 import cors from "cors";
 import session from "express-session";
 
-import { Saloons, Services, Workers } from "./controller/index.js";
+import {
+  Saloons,
+  Services,
+  Workers,
+  Orders,
+  Users,
+  Ratings,
+} from "./controller/index.js";
 
 const app = express();
 
@@ -34,5 +41,8 @@ app.use(
 app.use("/api/saloons", Saloons);
 app.use("/api/services", Services);
 app.use("/api/workers", Workers);
+app.use("/api/orders", Orders);
+app.use("/api/users", Users);
+app.use("/api/ratings", Ratings);
 //Paleidžiame serverį
 app.listen(3000);
